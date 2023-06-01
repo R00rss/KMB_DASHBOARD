@@ -13,7 +13,7 @@ export const BarChart =
                     }
                 }
             },
-            textColor: 'var(--selects-font-colors)',
+            textColor: '#000000',
             fontSize: "0.93vw",
             fontFamily: "Proxima Nova Ligth"
         }
@@ -80,7 +80,7 @@ export const BarChart =
                 }}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
-                labelTextColor={"#969292"}
+                labelTextColor={"#000000"}
                 legends={[
                     {
                         dataFrom: 'keys',

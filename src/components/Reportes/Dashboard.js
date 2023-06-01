@@ -187,7 +187,7 @@ const Dashboard = ({ client }) => {
             <div className={`${styles.graphic}  ${styles.graphic1}`}>
               <PieChart
                 data={dataMotivo}
-                arcLinkLabelsTextColor={"#ffffff"}
+                arcLinkLabelsTextColor={"#000000"}
                 colors={colors}
                 formattedValue={function (e) {
                   return e.value;
@@ -220,7 +220,7 @@ const Dashboard = ({ client }) => {
                     itemsSpacing: 0,
                     itemWidth: 100,
                     itemHeight: 20,
-                    itemTextColor: "#ffffff",
+                    itemTextColor: "#000000",
                     itemDirection: "left-to-right",
                     itemOpacity: 1,
                     symbolSize: 10,
@@ -234,7 +234,7 @@ const Dashboard = ({ client }) => {
                   },
                 ]}
                 theme={{
-                  fontSize: "10px",
+                  fontSize: "15px",
                   fontFamily: "Proxima Nova Ligth",
                 }}
               />
@@ -251,7 +251,7 @@ const Dashboard = ({ client }) => {
             <div className={`${styles.graphic} ${styles.graphic2}`} style={{}}>
               <PieChart
                 data={dataSubmotivo}
-                arcLinkLabelsTextColor={"#ffffff"}
+                arcLinkLabelsTextColor={"#000000"}
                 colors={colors}
                 // formattedValue={function (e) { return e.value }}
                 formattedValue={function (e) {
@@ -285,7 +285,7 @@ const Dashboard = ({ client }) => {
                     itemsSpacing: 0,
                     itemWidth: 100,
                     itemHeight: 20,
-                    itemTextColor: "#ffffff",
+                    itemTextColor: "#000000",
                     itemDirection: "left-to-right",
                     itemOpacity: 1,
                     symbolSize: 10,
@@ -300,7 +300,7 @@ const Dashboard = ({ client }) => {
                 ]}
                 // legends_styles={[]}
                 theme={{
-                  fontSize: "10px",
+                  fontSize: "15px",
                   fontFamily: "Proxima Nova Ligth",
                 }}
               />

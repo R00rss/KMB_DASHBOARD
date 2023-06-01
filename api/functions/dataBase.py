@@ -1,23 +1,16 @@
 import mysql.connector
 from mysql.connector import Error
+from decouple import config
 
-credentials = {
-    "host": "172.19.10.78",
-    "user": "kimobill",
-    "password": "sIst2m1s2020",
-    "database": "campaniasinbound",
-    "port": "3306",
-}
-credentials2 = {
-    "host": "172.19.10.44",
-    "user": "kimobill",
-    "password": "sIst2m1s2020",
-    "database": "call_center",
-    "port": "3306",
-}
+DB_NAME_I = config("DB_NAME_I")
+DB_NAME_II = config("DB_NAME_II")
+DB_HOST = config("DB_HOST")
+DB_USER = config("DB_USER")
+DB_PASS = config("DB_PASS")
+DB_PORT = config("DB_PORT")
+
 
 def formatear_arreglo(arreglo):
-
     result_final = []
     for res in arreglo:
         result_final.append(res[0])
@@ -27,36 +20,39 @@ def formatear_arreglo(arreglo):
 def consulta(operation):
     try:
         connection = mysql.connector.connect(
-            host=credentials["host"],
-            user=credentials["user"],
-            password=credentials["password"],
-            database=credentials["database"],
-            port=credentials["port"],
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASS,
+            database=DB_NAME_I,
+            port=DB_PORT,
         )
         if connection.is_connected():
             db_Info = connection.get_server_info()
+            print(db_Info)
     except Error as e:
         print("Error al conectarse a MySQL", e)
     cursor = connection.cursor()
     cursor.execute(operation)
     result = cursor.fetchall()
-        
+
     if connection.is_connected():
         connection.close()
         cursor.close()
     return result
 
+
 def consulta2(operation):
     try:
         connection = mysql.connector.connect(
-            host=credentials2["host"],
-            user=credentials2["user"],
-            password=credentials2["password"],
-            database=credentials2["database"],
-            port=credentials2["port"],
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASS,
+            database=DB_NAME_II,
+            port=DB_PORT,
         )
         if connection.is_connected():
             db_Info = connection.get_server_info()
+            print(db_Info)
     except Error as e:
         print("Error al conectarse a MySQL", e)
     cursor = connection.cursor()
@@ -71,14 +67,15 @@ def consulta2(operation):
 def consultaOneRow(operation):
     try:
         connection = mysql.connector.connect(
-            host="172.19.10.78",
-            user="kimobill",
-            password="sIst2m1s2020",
-            database="campaniasinbound",
-            port="3306",
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASS,
+            database=DB_NAME_I,
+            port=DB_PORT,
         )
         if connection.is_connected():
             db_Info = connection.get_server_info()
+            print(db_Info)
     except Error as e:
         print("Error al conectarse a MySQL", e)
     cursor = connection.cursor()

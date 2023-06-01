@@ -12,9 +12,9 @@
   --D4-card-bg-color: #272727;
 }
 .dashboard4__container{
-  margin: 1rem 0 0 0;
+  /* margin: 1rem 0 0 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
 }
 
 .dashboard4__container >.select__container{
@@ -41,7 +41,7 @@
   display: grid;
   grid-template-columns: minmax(530px, 530px) auto;
   gap: 2rem;
-  background-color: var(--DPage-bg-color);
+  /* background-color: var(--DPage-bg-color); */
 }
 .dashboard4__container .graphic {
   /* border: solid 2px var(--D4-card-border-color); */
@@ -54,7 +54,7 @@
 }
 .dashboard4__container .graphic .graphic__container {
   height: calc(300px - 25px);
-  background-color: var(--D4-card-bg-color);
+  /* background-color: var(--D4-card-bg-color); */
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }

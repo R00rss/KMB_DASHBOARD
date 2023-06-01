@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  db:
+    # name of container
+    container_name: mysql_dev_78
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dev_kmb
+      # MYSQL_DATABASE: test
+    volumes:
+      - ./call_center.sql:/docker-entrypoint-initdb.d/call_center.sql
+      - ./campaniasinbound.sql:/docker-entrypoint-initdb.d/campaniasinbound.sql
+    ports:
+      - 4000:3306
+    command: mysqld --sql_mode="" --character-set-server=utf8 --collation-server=utf8_slovenian_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
+
+  phpmyadmin:
+    container_name: phpmyadmin_dev_78
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    ports:
+      - 4001:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: dev_kmb

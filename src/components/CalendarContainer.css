@@ -1,6 +1,7 @@
 .calendar__container{
     border-radius: 5px;
-    background-color: rgb(42, 42, 42);
+    background-color: #f2f2f2;
+    box-shadow: 2px 2px 10px -2px #000000;
 }
 .calendar__box{
     display: flex;
@@ -13,7 +14,7 @@
     color: white;
 } */
 .datepicker__container{
-    background-color: #292960;
+    /* background-color: #292960; */
 }
 .calendar__title__container{
     border-top-left-radius: 5px;

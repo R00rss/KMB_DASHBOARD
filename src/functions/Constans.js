@@ -21,8 +21,8 @@ export const estilos_calendario = {
   button: {
     marginRight: '-6px',
     borderRadius: '2px',
-    backgroundColor: '#333333',
-    ":hover": { backgroundColor: '#222222' }
+    backgroundColor: '#f2f2f2',
+    ":hover": { backgroundColor: '#f6f6f6' }
   },
   svg: {
     color: 'var(--selects-font-colors)'

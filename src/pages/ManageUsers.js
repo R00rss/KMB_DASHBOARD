@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar/Navbar'
 import CreateUser from './CreateUser'
 import DeleteUser from './DeleteUser'
 import EditUser from './EditUser'
+import Footer from '../components/Footer'
 
 const ManageUsers = () => {
   const [createUser, setCreateUser] = useState(true)
@@ -11,53 +12,47 @@ const ManageUsers = () => {
   const [deleteUser, setDeleteUser] = useState(false)
 
   return (
-    <div className='manageUser__container' style={{backgroundColor:"#000000"}}>
-      <Navbar selected = "manageUsers"/>
-      <div className="dashboard_selectors ">
+    <div className='relative min-h-screen' style={{ backgroundColor: "#f2f2f2" }}>
+      <Navbar selected="manageUsers" />
+      <div className="flex justify-start items-center ml-3 gap-3">
         <button
-          id={createUser ? "activate" : ""}
+          className={`${createUser ? "bg-transparent text-[var(--secondary-color)]" : "text-slate-200"} outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
           onClick={() => {
             setUpdateUser(false)
             setCreateUser(true)
             setDeleteUser(false)
           }}
-          className='dashboarpage__btn dashboarpage__btn1'>
+        >
           Crear usuario
         </button>
         <button
-          id={updateUser ? "activate" : ""}
+          className={`${updateUser ? "bg-transparent text-[var(--secondary-color)]" : "text-slate-200"} outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
           onClick={() => {
             setUpdateUser(true)
             setCreateUser(false)
             setDeleteUser(false)
           }}
-          className='dashboarpage__btn dashboarpage__btn2 '>
+        >
           Editar usuario
         </button>
 
         <button
-          id={deleteUser ? "activate" : ""}
+          className={`${deleteUser ? "bg-transparent text-[var(--secondary-color)]" : "text-slate-200"} outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
           onClick={() => {
             setUpdateUser(false)
             setCreateUser(false)
             setDeleteUser(true)
           }}
-          className='dashboarpage__btn'>
+        >
           Eliminar usuario
         </button>
 
       </div>
-      <>
-        {createUser ?
-          <CreateUser />
-          : updateUser ?
-            <EditUser />
-            : deleteUser ?
-              <DeleteUser />
-              : <></>
-        }
-      </>
+      {createUser && <CreateUser />}
+      {updateUser && <EditUser />}
+      {deleteUser && <DeleteUser />}
 
+      <Footer />
     </div>
   )
 }

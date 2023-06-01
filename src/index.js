@@ -7,13 +7,11 @@ import Reportes2 from "./pages/Reportes2";
 import DashboardPage from "./pages/DashboardPage";
 import RegresionPage from "./pages/RegresionPage";
 import FailPage from "./pages/FailPage";
-import Navbar from "./components/Navbar";
 import AudioToText from "./pages/AudioToText";
 import CreateUser from "./pages/CreateUser";
 import EditUser from "./pages/EditUser";
 import DeleteUser from "./pages/DeleteUser";
 import ManageUsers from "./pages/ManageUsers";
-import CrearPlantilla from "./pages/Plantillas/CrearPlantilla";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,7 +22,6 @@ root.render(
         <Route path="/reporte" element={<Reportes2 />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/regresion" element={<RegresionPage />} />
-        <Route path="/navbar" element={<Navbar />} />
         <Route path="/audioToText" element={<AudioToText />} />
         <Route path="/createUser" element={<CreateUser />} />
         <Route path="/updateUser" element={<EditUser />} />

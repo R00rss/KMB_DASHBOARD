@@ -3,7 +3,7 @@ import HomeReportes2 from '../components/HomeReportes2';
 import ReportesFacturacion2 from '../components/ReporteFacturacion2'
 import DetallesReportes2 from '../components/DetallesReportes2'
 import FailPage from './FailPage';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -171,17 +171,17 @@ function Reportes2() {
             {validate === 'true' ?
                 <>
                     <Navbar selected={"Reportes"} />
-                    <div className="dashboard_selectors">
+                    <div className="flex justify-start items-center ml-3 gap-3">
                         <button
-                            id={tab1 ? "activate" : ""}
                             onClick={() => selectTab(1)}
-                            className='dashboarpage__btn dashboarpage__btn1 '>
+                            className={`${tab1 ? "bg-transparent text-[var(--secondary-color)]" : "text-slate-200"} outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
+                        >
                             Reportes
                         </button>
                         <button
-                            id={tab2 ? "activate" : ""}
                             onClick={() => selectTab(2)}
-                            className='dashboarpage__btn dashboarpage__btn2'>
+                            className={`${tab2 ? "bg-transparent text-[var(--secondary-color)]" : "text-slate-200"} outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
+                        >
                             Análisis Reportes
                         </button>
                     </div>
@@ -209,7 +209,7 @@ function Reportes2() {
                         </>
                         : tab2 ?
                             <div>
-                                <Dashboard client={client}/>
+                                <Dashboard client={client} />
                             </div>
                             :
                             <>no tab</>

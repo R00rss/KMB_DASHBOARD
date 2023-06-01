@@ -151,9 +151,9 @@ def eficienciaAgente(agente, cooperativa, mes):
 
 def generar_detalles_reporte(mes, cooperativa="COOPERATIVA DAQUILEMA"):
     lastD = lastDay(mes)
-    #todayYear = date.today().year
-    #todayYear = str(todayYear)
-    todayYear = "2022"
+    # todayYear = date.today().year
+    # todayYear = str(todayYear)
+    todayYear = "2023"
     dateI = "{todayYear}-{mes}-01".format(mes=mes, todayYear=todayYear)
     dateE = "{todayYear}-{mes}-{lastDay}".format(
         mes=mes, lastDay=lastD, todayYear=todayYear
@@ -187,7 +187,8 @@ def generar_estados_rrss(cooperativa="all"):
                 + "    Cliente as cooperativa,"
                 + "  Identificacion as CI "
                 + "from campaniasinbound.encuesta    "
-                + "where length(Respuesta1_1)>0 group by VOC order by calificacion desc; "),
+                + "where length(Respuesta1_1)>0 group by VOC order by calificacion desc; "
+            ),
             "consulta_rrss_estados": consulta(
                 "select"
                 + "    case"
@@ -239,6 +240,8 @@ def generar_estados_rrss(cooperativa="all"):
             ),
             "cooperativa": cooperativa,
         }
+
+
 def generar_estado_rrss(id_rrss):
     return {
         "consulta_rrss": consulta(
@@ -475,7 +478,7 @@ def nombres_estados():
 def generar_datos_estado_mensual(month, agent):
     return {
         "data": consulta2(
-            "SELECT agent.name, DATE_FORMAT(datetime_init,'%d') as 'date',IF( ISNULL(audit.id_break) = 1,0,id_break) as Estado,SUM(TIME_TO_SEC(audit.duration)/3600) AS Duracion FROM call_center.audit  INNER JOIN call_center.agent on agent.id = audit.id_agent WHERE agent.name = '{agent}' AND datetime_init LIKE concat(year(curdate()),'-{month}%') group BY agent.name, substr(datetime_init,6,5) ASC, Estado ORDER BY agent.name, substr(datetime_init,6,5) ASC, id_agent ASC".format(
+            "SELECT agent.name, DATE_FORMAT(datetime_init,'%d') as 'date',IF( ISNULL(audit.id_break) = 1,0,id_break) as Estado,SUM(TIME_TO_SEC(audit.duration)/3600) AS Duracion FROM call_center.audit  INNER JOIN call_center.agent on agent.id = audit.id_agent WHERE agent.name = '{agent}' AND datetime_init LIKE concat(year(curdate()),'-{month}%') group BY agent.name, substr(datetime_init,6,5), Estado ORDER BY agent.name, substr(datetime_init,6,5) ASC, id_agent ASC".format(
                 month=month, agent=agent
             )
         ),
@@ -489,9 +492,9 @@ def generar_reportes(mes, cooperativa="COOPERATIVA DAQUILEMA"):  # "02"
     tAbandonadas = 0
     pServicio = 0
     pAbandonado = 0
-    #todayYear = date.today().year
-    #todayYear = str(todayYear)
-    todayYear = "2022"
+    # todayYear = date.today().year
+    # todayYear = str(todayYear)
+    todayYear = "2023"
     llamadas_entrantes = []
     llamadas_atendidas = []
     llamadas_abandonadas = []

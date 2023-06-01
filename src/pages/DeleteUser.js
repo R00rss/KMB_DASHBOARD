@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import logo1 from "../img/logos/kmb2.png"
+import logo1 from "../img/logos/kmb.png"
 import "./CreateUser.css"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -167,7 +167,7 @@ const DeleteUser = () => {
                                             onChange={(e) => setSelectedUser(e.target.value)}
                                             value={selectedUser}
                                         >
-                                            <option defaultValue>{usuarios.length>0?usuarios[0]:["cargando..."]}</option>
+                                            <option defaultValue>{usuarios.length > 0 ? usuarios[0] : ["cargando..."]}</option>
                                             {usuarios.map((user, key) => {
                                                 if (key === 0) {
                                                     return null

@@ -21,7 +21,8 @@
   border:none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: var(--D4-card-bg-color);
+  background-color: #f2f2f2;
+  /* background-color: var(--D4-card-bg-color); */
   display: flex;
   align-items: center;
   justify-content: center;

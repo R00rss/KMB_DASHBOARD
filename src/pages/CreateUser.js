@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 //import SelectPrimary from '../components/SelectPrimary'
-import logo1 from "../img/logos/kmb2.png"
+import logo1 from "../img/logos/kmb.png"
 import "./CreateUser.css"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -201,7 +201,7 @@ const CreateUser = () => {
                                                         }
                                                         return <option key={key}>{cooperativa}</option>
                                                     })}
-                                                </select>   
+                                                </select>
                                             </div>
 
                                             : <></>
