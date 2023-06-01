@@ -1,83 +1,49 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../components/Dashboard";
 import Dashboard2 from "../components/Dashboard2";
 import Dashboard3 from "../components/Dashboard3";
 import Dashboard4 from "../components/Dashboard4";
 import Dashboard5 from "../components/AnalisisLlamadasEstados/Dashboard5";
 import LoadingComponent from "../components/LoadingComponent";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 import SelectDateDashboard from "../components/SelectDateDashboard";
 import SelectGlobal from "../components/SelectGlobal";
 import "./DashboardPage.css";
 import FailPage from "./FailPage";
-import HeatMap from "./HeatMapExternal/HeatMap";
+import useTitle from "../hooks/useTitle";
+import NavbarDashboards from "../components/Dashboards/NavbarDashboards";
+import AnalisisIndividual from "../components/Dashboards/AnalisisIndividual";
+// import HeatMap from "./HeatMapExternal/HeatMap";
 
-const DashboardPage = () => {
+function DashboardPage() {
+  const { get_title } = useTitle("KMB | Dashboard");
   const [dataAgente, setDataAgente] = useState({});
   const [dataCooperativa, setDataCooperativa] = useState({});
   const [data, setData] = useState({});
   const [dataPie, setDataPie] = useState({});
   const [selected, setSelected] = useState({});
-  const [selectDashboard1, setSelectDashboard1] = useState(true);
-  const [selectDashboard2, setSelectDashboard2] = useState(false);
-  const [selectDashboard3, setSelectDashboard3] = useState(false);
-  const [selectDashboard4, setSelectDashboard4] = useState(false);
-  const [selectDashboard5, setSelectDashboard5] = useState(false);
-  const [selectDashboard6, setSelectDashboard6] = useState(false);
+
+  const [dashboard_options, set_dashboard_options] = useState({
+    dashboard1: true,
+    dashboard2: false,
+    dashboard3: false,
+    dashboard4: false,
+    dashboard5: false,
+  })
   const [loading, setLoading] = useState(false);
   const validate = sessionStorage.getItem("Validate");
   const status = parseInt(sessionStorage.getItem("Status"));
-  var client = sessionStorage.getItem("Client");
+  let client = sessionStorage.getItem("Client");
   if (client === "") {
     client = null;
   }
-  const selectDashboard = (dashboard) => {
-    if (dashboard === 1) {
-      setSelectDashboard1(true);
-      setSelectDashboard2(false);
-      setSelectDashboard3(false);
-      setSelectDashboard4(false);
-      setSelectDashboard6(false);
-      setSelectDashboard5(false);
-    } else if (dashboard === 2) {
-      setSelectDashboard1(false);
-      setSelectDashboard2(true);
-      setSelectDashboard3(false);
-      setSelectDashboard4(false);
-      setSelectDashboard6(false);
-      setSelectDashboard5(false);
-    } else if (dashboard === 3) {
-      setSelectDashboard1(false);
-      setSelectDashboard2(false);
-      setSelectDashboard3(true);
-      setSelectDashboard4(false);
-      setSelectDashboard6(false);
-      setSelectDashboard5(false);
-    } else if (dashboard === 4) {
-      setSelectDashboard1(false);
-      setSelectDashboard2(false);
-      setSelectDashboard3(false);
-      setSelectDashboard4(true);
-      setSelectDashboard6(false);
-      setSelectDashboard5(false);
-    } else if (dashboard === 5) {
-      setSelectDashboard5(true);
-      setSelectDashboard1(false);
-      setSelectDashboard2(false);
-      setSelectDashboard3(false);
-      setSelectDashboard4(false);
-      setSelectDashboard6(false);
-    } else if (dashboard === 6) {
-      setSelectDashboard5(false);
-      setSelectDashboard1(false);
-      setSelectDashboard2(false);
-      setSelectDashboard3(false);
-      setSelectDashboard4(false);
-      setSelectDashboard6(true);
-    }
-  };
 
-  const formatData = (data_) => {
+  function handle_change_dashboard(dashboard) {
+    const clone = JSON.parse(JSON.stringify(dashboard_options))
+    Object.keys(clone).forEach((key) => clone[key] = key === dashboard)
+    set_dashboard_options(clone)
+  }
+
+  function formatData(data_) {
     let dataResult = [{}];
     var data_diario_global = [];
     var data_diario_global_cooperativa = [];
@@ -214,95 +180,47 @@ const DashboardPage = () => {
     fetch("/api/agentes")
       .then((resp) => {
         if (resp.status === 200) return resp.json();
-        else alert("Error", resp.status);
+        return null
       })
       .then((data_) => {
+        if (!data_) return
         setDataAgente(data_);
-        console.log("agentes", dataAgente);
       }); // eslint-disable-next-line
   }, []);
+
   useEffect(() => {
-    if ((status === 1) | (status === 2)) {
+    if (status === 3) {
+      setDataCooperativa([client]);
+      return
+    }
+
+
+    if ((status === 1) | (status === 2))
       fetch("/api/cooperativas")
         .then((resp) => {
           if (resp.status === 200) return resp.json();
-          else alert("Error", resp.status);
+          return null
         })
         .then((data_) => {
+          if (data_ === null) return
           setDataCooperativa(data_);
           console.log("cooperativas", dataCooperativa);
         });
-    } else if (status === 3) {
-      setDataCooperativa([client]);
-    }
+
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    console.log("el valor de data es:", data);
-  }, [data]);
-  useEffect(() => {
-    console.log("el valor de loading es:", loading);
-  }, [loading]);
-
-  useEffect(() => {
-    document.getElementById("title__page").innerHTML = "KMB | Dashboard";
-  }, []);
 
   const GeneratePage = () => {
     return (
-      <div className="dashboardPage__container">
+      <div className="min-h-screen">
         <Navbar selected={"DashboardPage"} />
-        <div className="dashboard_selectors">
-          <button
-            id={selectDashboard1 ? "activate" : ""}
-            onClick={() => selectDashboard(1)}
-            className="dashboarpage__btn dashboarpage__btn1 "
-          >
-            Análisis Individual Trx
-          </button>
-
-          <button
-            id={selectDashboard2 ? "activate" : ""}
-            onClick={() => selectDashboard(2)}
-            className="dashboarpage__btn dashboarpage__btn2"
-          >
-            Análisis Global Trx
-          </button>
-          <button
-            id={selectDashboard4 ? "activate" : ""}
-            onClick={() => selectDashboard(4)}
-            className="dashboarpage__btn dashboarpage__btn2"
-          >
-            Voz del Cliente
-          </button>
-          <button
-            id={selectDashboard5 ? "activate" : ""}
-            onClick={() => selectDashboard(5)}
-            className="dashboarpage__btn dashboarpage__btn2"
-          >
-            Análisis Call Center
-          </button>
-          {status === 3 ? (
-            <></>
-          ) : (
-            <button
-              id={selectDashboard3 ? "activate" : ""}
-              onClick={() => selectDashboard(3)}
-              className="dashboarpage__btn"
-            >
-              Análisis Estados
-            </button>
-          )}
-          <button
-            id={selectDashboard6 ? "activate" : ""}
-            onClick={() => selectDashboard(6)}
-            className="dashboarpage__btn"
-          >
-            Mapa de calor
-          </button>
-        </div>
-        {selectDashboard1 ? (
+        <NavbarDashboards
+          dashboard_options={dashboard_options}
+          handle_change_dashboard={handle_change_dashboard}
+          status={status}
+        />
+        {dashboard_options.dashboard1 && (
           <>
             <div className="selects__container">
               <SelectGlobal
@@ -322,7 +240,7 @@ const DashboardPage = () => {
             <div className="dashboarpage__calcular__btn__container">
               <button
                 onClick={() => getDataAgente()}
-                className="dashboarpage__calcular__btn"
+                className="dashboarpage__calcular__btn px-2"
               >
                 Calcular Eficiencia Individual
               </button>
@@ -331,7 +249,7 @@ const DashboardPage = () => {
               {loading === true ? (
                 <LoadingComponent />
               ) : (
-                <Dashboard
+                <AnalisisIndividual
                   data={data}
                   dataInfo={selected}
                   dataPie={dataPie}
@@ -340,37 +258,25 @@ const DashboardPage = () => {
               )}
             </div>
           </>
-        ) : selectDashboard2 ? (
-          <Dashboard2 client={client} />
-        ) : selectDashboard3 ? (
-          <Dashboard3 client={client} />
-        ) : selectDashboard4 ? (
-          <Dashboard4 client={client} />
-        ) : selectDashboard5 ? (
-          <Dashboard5 client={client} />
-        ) : selectDashboard6 ? (
-          <HeatMap />
-        ) : (
-          <></>
         )}
+
+        {dashboard_options.dashboard2 && <Dashboard2 client={client} />}
+        {dashboard_options.dashboard3 && <Dashboard3 client={client} />}
+        {dashboard_options.dashboard4 && <Dashboard4 client={client} />}
+        {dashboard_options.dashboard5 && <Dashboard5 client={client} />}
+
       </div>
     );
   };
-  return (
-    <>
-      {validate !== "true" ? (
-        <FailPage />
-      ) : status === 3 ? (
-        client === null ? (
-          <FailPage />
-        ) : (
-          <GeneratePage />
-        )
-      ) : (
-        <GeneratePage />
-      )}
-    </>
-  );
+
+  console.log(status, validate, client)
+  // return <>test</>
+
+  if (validate === "false") return <FailPage />
+  if (status !== 3) return <GeneratePage />;
+  if (client === null) return <FailPage />;
+  return <GeneratePage />;
+
 };
 
 export default DashboardPage;

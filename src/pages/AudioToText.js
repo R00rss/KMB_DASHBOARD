@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from '../components/Navbar/Navbar'
 import FailPage from "./FailPage";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -123,60 +123,64 @@ const AudioToText = () => {
     console.log("el valor de polarity es: " + JSON.stringify(polarity));
   }, [polarity]);
 
+
+  if (validate !== "true") {
+    return <FailPage />
+  }
+
   return (
-    <div>
-      {validate !== "true" ? (
-        <FailPage />
-      ) : (
-        <div className="audioToText_container">
-          <Navbar selected={"AudioToText"} />
-          <div className="dashboard_selectors">
-            <label>Audio a texto</label>
-          </div>
-          <div className="content">
-            <div className="input__container">
-              <input
-                type="file"
-                name="file"
-                onChange={(e) => changeHandler(e)}
-              />
-              <button
-                className="btn_AudioToText"
-                onClick={(e) => handleClic(e)}
-              >
-                Audio a texto
-              </button>
-            </div>
-            {loading ? (
-              <LoadingComponent />
-            ) : Object.keys(polarity).length > 0 ? (
-              <div className="result__container">
-                <article className="text__container">
-                  <h4>Texto obtenido del audio:</h4>
-                  <p>{text}</p>
-                </article>
-                <div className="polatity__container">
-                  <h4>Analisis de sentimiento:</h4>
-                  <div className="graphic__container">
-                    <PieChart
-                      theme={{
-                        fontSize: "0.75rem",
-                        fontFamily: "Proxima Nova Regular",
-                      }}
-                      arcLinkLabel={(e) => `${e.id}: ${e.value}%`}
-                      formattedValue={(e) => `${e.value}`}
-                      tooltip={customTooltip}
-                      data={formData(polarity)}
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
+
+    <div className="audioToText_container">
+      <Navbar selected={"AudioToText"} />
+      <div className="flex justify-start items-center ml-3 gap-3">
+
+        <button className={`outline-none focus:outline-none px-2 py-1 rounded-b-lg bg-[var(--secondary-color)] border-2 border-[var(--secondary-color)] hover:bg-transparent hover:text-[var(--secondary-color)] duration-300`}
+        >
+          Audio a texto
+        </button>
+      </div>
+      <div className="content">
+        <div className="input__container">
+          <input
+            type="file"
+            name="file"
+            onChange={(e) => changeHandler(e)}
+          />
+          <button
+            className="btn_AudioToText"
+            onClick={(e) => handleClic(e)}
+          >
+            Audio a texto
+          </button>
         </div>
-      )}
+        {loading ? (
+          <LoadingComponent />
+        ) : Object.keys(polarity).length > 0 ? (
+          <div className="result__container">
+            <article className="text__container">
+              <h4>Texto obtenido del audio:</h4>
+              <p>{text}</p>
+            </article>
+            <div className="polatity__container">
+              <h4>Analisis de sentimiento:</h4>
+              <div className="graphic__container">
+                <PieChart
+                  theme={{
+                    fontSize: "0.75rem",
+                    fontFamily: "Proxima Nova Regular",
+                  }}
+                  arcLinkLabel={(e) => `${e.id}: ${e.value}%`}
+                  formattedValue={(e) => `${e.value}`}
+                  tooltip={customTooltip}
+                  data={formData(polarity)}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };

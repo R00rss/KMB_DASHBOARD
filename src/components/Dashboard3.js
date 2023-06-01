@@ -169,18 +169,18 @@ const Dashboard3 = () => {
             body: JSON.stringify(bodyData)
         }).then(resp => {
             if (resp.status === 200) return (resp.json())
-            else {
-                MySwal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '¡Error en la respuesta del servidor!'
-                })
-            }
+            return null
+            // else {
+            //     MySwal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: '¡Error en la respuesta del servidor!'
+            //     })
+            // }
         }
         ).then(data => {
-            setDataStatusMensual(mergeArraysFromId2(data))
-
-            //console.log((separateAgents(data['data'],1)))
+            if (data)
+                setDataStatusMensual(mergeArraysFromId2(data))
         }).then(
             setLoading(false)
         ).catch(error => { console.error("Error al enviar los datos:", error) })
@@ -195,16 +195,18 @@ const Dashboard3 = () => {
             body: JSON.stringify(bodyData)
         }).then(resp => {
             if (resp.status === 200) return (resp.json())
-            else {
-                MySwal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '¡Error en la respuesta del servidor!'
-                })
-            }
+            return null
+            // else {
+            //     MySwal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: '¡Error en la respuesta del servidor!'
+            //     })
+            // }
         }
         ).then(data => {
-            setNameStatus(data)
+            if (data)
+                setNameStatus(data)
         }).then(
         ).catch(error => { console.error("Error al enviar los datos:", error) })
     }
@@ -216,16 +218,18 @@ const Dashboard3 = () => {
             }
         }).then(resp => {
             if (resp.status === 200) return (resp.json())
-            else {
-                MySwal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: '¡Error en la respuesta del servidor!'
-                })
-            }
+            return null
+            // else {
+            //     MySwal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: '¡Error en la respuesta del servidor!'
+            //     })
+            // }
         }
         ).then(data => {
-            setAgentes(data)
+            if (data)
+                setAgentes(data)
         }).then(
         ).catch(error => { console.error("Error al enviar los datos:", error) })
     }

@@ -5,7 +5,7 @@
 }
 .dashboardPage__container {
   /* background-color: var(--bg_color); */
-  background-color: var(--DPage-bg-color);
+  /* background-color: var(--DPage-bg-color); */
 }
 .dashboard_selectors {
   margin: 0 0 0 1rem;

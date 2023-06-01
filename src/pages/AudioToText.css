@@ -4,22 +4,24 @@
   --fontAudioBtn: 15px;
 }
 .audioToText_container {
-  background-color: #000000;
+  background-color: #f2f2f2;
+  min-height: 100dvh;
 }
 .audioToText_container > .content {
   width: 100%;
-  min-height: 75vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .content h4 {
   font-size: var(--fontAudioTitle);
   margin: 0;
-  color: #fff;
+  color: #0a0a0a;
   font-family: Proxima Nova Ligth;
 }
 .content p {
-  color: rgb(132, 132, 132);
+  color: rgb(12, 12, 12);
 }
 .input__container {
   font-family: Proxima Nova Ligth;
@@ -34,7 +36,7 @@
   border: none;
   width: 40%;
   align-self: center;
-  border: solid 1px #212529;
+  box-shadow: 2px 2px 12px -2px #000000;
 }
 .input__container > input {
   color: rgb(132, 132, 132);
@@ -42,7 +44,7 @@
   border-radius: 5px;
   border: none;
   padding: 0.5rem;
-  background-color: #000000;
+  background-color: #f4f1f1;
 }
 .input__container > input::file-selector-button {
   background-color: var(--D4-card-bg-title);
@@ -84,13 +86,15 @@
   padding: 1rem;
   font-size: var(--fontAudioContent);
   border-radius: 5px;
-  border: solid 1px #212529;
+  /* border: solid 1px #212529; */
+  box-shadow: 2px 2px 10px -2px #000000;
 }
 .polatity__container {
   padding: 1rem;
   min-height: 360px;
   border-radius: 5px;
-  border: solid 1px #212529;
+  /* border: solid 1px #212529; */
+  box-shadow: 2px 2px 10px -2px #000000;
 }
 .audioToText_container .graphic__container {
   margin: auto;

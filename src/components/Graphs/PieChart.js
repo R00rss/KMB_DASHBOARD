@@ -4,7 +4,7 @@ import { ResponsivePie } from '@nivo/pie'
 export const PieChart = (
     { data,
         arcLinkLabelsTextColor =
-        '#333333'
+        '#000000'
         ,
         arcLabelsTextColor = {
             from: 'color',
@@ -20,11 +20,11 @@ export const PieChart = (
             axis: {
                 legend: {
                     text: {
-                        fontSize: "15px",
+                        fontSize: "16px",
                     }
                 }
             },
-            fontSize: "13px",
+            fontSize: "16px",
             fontFamily: "Proxima Nova Ligth",
             tooltip: {
                 container: {
@@ -37,12 +37,12 @@ export const PieChart = (
             <div
                 style={{
                     padding: "0.5rem 1rem",
-                    color: "#ffffff",
+                    color: "#000000",
                     background: '#222222',
                     display: "flex",
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: '15px',
+                    fontSize: '17px',
                     fontFamily: "Proxima Nova Ligth"
                 }}
             >
@@ -65,8 +65,8 @@ export const PieChart = (
         margin = { top: 40, right: 80, bottom: 80, left: 80 },
         stylesPie = { padAngle: 1, cornerRadius: 6, activeOuterRadiusOffset: 13 },
         arrowStyles = { SkipAngle: 0, Offset: -5, DiagonalLength: 15, StraightLength: 7, Thickness: 2, RadiusOffset: 0.6 },
-        callbackFunction = ()=>{return null},
-        legends_styles= [
+        callbackFunction = () => { return null },
+        legends_styles = [
             {
                 anchor: "right",
                 direction: 'column',
@@ -76,7 +76,7 @@ export const PieChart = (
                 itemsSpacing: 5,
                 itemWidth: 10,
                 itemHeight: 18,
-                itemTextColor: '#ffffff',
+                itemTextColor: '#000000',
                 itemDirection: 'left-to-right',
                 itemOpacity: 1,
                 symbolSize: 18,

@@ -85,11 +85,11 @@ const HomeReportes2 = (props) => {
     return (
         <div className='container__home'>
 
-            <div className='container__cards'>
-                <div className='tableHome__container col-7'>
+            <div className='container__cards gap-4'>
+                <div className='tableHome__container'>
                     <TablaHome date={date_to_number(date)} client={props.client === null ? selectedCooperativa : props.client} />
                 </div>
-                <div className='selectHome__container col-4'>
+                <div className='selectHome__container'>
                     {props.client === null ?
                         <div className='home__select'>
                             <SelectPrimary
@@ -97,7 +97,7 @@ const HomeReportes2 = (props) => {
                                 data={cooperativas}
                                 defaultOption="Escoja una cooperativa"
                                 callbackFunction={getCooperativaFromSelect}
-                                />
+                            />
                         </div>
                         :
                         <></>

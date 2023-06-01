@@ -4,27 +4,32 @@
 .table__global {
   width: 100%;
   font-family: Proxima Nova Ligth;
+  box-shadow: 2px 2px 10px -2px #000000;
+  border-radius: 10px;
+  font-size: 16px;
 }
 .table__global > thead > tr > th {
   color: #000000;
-  background-color: var(--D4-card-bg-title);
-  border: solid 1px #000000;
+  /* background-color: var(--D4-card-bg-title); */
+  /* border: solid 1px #000000; */
+ 
   border-radius: 1px;
-  height: 7vh;
-  min-width: 8vw;
+  /* height: 7vh; */
+  /* min-width: 8vw; */
   font-weight: normal;
   font-family: Proxima Nova Regular;
   padding: 0 2vw;
-  font-size: 1vw;
+  background-color: var(--D4-card-bg-title);
 }
 .table__global > tbody > tr > td {
-  font-size: 1vw;
-  height: 5vh;
+  /* font-size: 1vw; */
+  /* height: 5vh; */
   font-family: Proxima Nova Regular ;
-  background-color: var(--D4-card-bg-color);
-  border: solid 1px #000000;
-  border-radius: 1px;
-  color: rgb(255, 255, 255);
+  /* background-color: var(--D4-card-bg-color); */
+  border: solid 1px #dad6d6;
+  background-color: #d0d0d0;
+  border-radius: 5px;
+  color: rgb(6, 65, 90);
   padding: 0 2vw;
 }
 #tdTotal{

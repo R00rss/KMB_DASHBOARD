@@ -196,8 +196,8 @@ const ExcelVoc = ({ data, file_name, client }) => {
           });
           sheet.column('F').width(30)
           sheet.column('G').width(75)
-          sheet.column('G').style({ fontSize: "8" ,horizontalAlignment:"justify",verticalAlignment:"justify" })
-          sheet.cell('G5').style({ horizontalAlignment:"center",verticalAlignment:"center" })
+          sheet.column('G').style({ fontSize: "8", horizontalAlignment: "justify", verticalAlignment: "justify" })
+          sheet.cell('G5').style({ horizontalAlignment: "center", verticalAlignment: "center" })
         }
 
       });
@@ -209,7 +209,7 @@ const ExcelVoc = ({ data, file_name, client }) => {
   };
 
   return (
-    <div className="excelExportHelper__container" style={{marginTop:"1rem"}}>
+    <div className="excelExportHelper__container px-2" style={{ marginTop: "1rem" }}>
       <button className="toExcel__btn" onClick={() => createDownLoadData()} > Descargar VOC </button>
     </div>
   );

@@ -26,10 +26,10 @@ ChartJS.register(
 const options = {
   responsive: true,
   scales: {
-    color:"#ede2e1",
+    color: "#000000",
     xAxis: {
       ticks: {
-        color:"#ede2e1",
+        color: "#000000",
         font: {
           family: "Proxima Nova Ligth",
           size: "12vw"
@@ -38,7 +38,7 @@ const options = {
     },
     yAxis: {
       ticks: {
-        color:"#ede2e1",
+        color: "#000000",
         font: {
           family: "Proxima Nova Ligth",
           size: "12vw"
@@ -56,7 +56,7 @@ const options = {
           family: "Proxima Nova Ligth",
           size: "12vw"
         },
-        color:"#ede2e1"     
+        color: "#000000"
       }
     }
   }

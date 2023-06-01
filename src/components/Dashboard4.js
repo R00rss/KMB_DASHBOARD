@@ -13,7 +13,6 @@ import colors from "../functions/Constans";
 import getDataFromBackend from "../functions/ApiFunctions";
 import SelectedCooperativa from "./SelectedCooperativa";
 import ExcelVoc from "./ToExcel/ExcelVoc";
-import { swapNames3 } from "../functions/EvilFunctions";
 
 const Dashboard4 = ({ client }) => {
   //const cooperativas = ["OSCUS", "DAQUILEMA"];
@@ -33,6 +32,7 @@ const Dashboard4 = ({ client }) => {
   const formatDataToPiechart = (estados) => {
     let auxData = [];
     estados.forEach((estado) => {
+      console.log("estado", estado)
       auxData.push({
         id: estado[0], //nombre del status
         value: estado[1], //valor del status en segundos
@@ -40,6 +40,7 @@ const Dashboard4 = ({ client }) => {
         color: "hsl(95, 70%, 50%)",
       });
     });
+    console.log("auxData", auxData)
     return auxData;
   };
   const swapButtons = (setbuttonOn, setbuttonOff) => {
@@ -118,15 +119,17 @@ const Dashboard4 = ({ client }) => {
     })
       .then((resp) => {
         if (resp.status === 200) return resp.json();
-        else {
-          MySwal.fire({
-            icon: "error",
-            title: "Error",
-            text: "¡Error en la respuesta del servidor!",
-          });
-        }
+        // else {
+        //   MySwal.fire({
+        //     icon: "error",
+        //     title: "Error",
+        //     text: "¡Error en la respuesta del servidor!",
+        //   });
+        // }
+        return null
       })
       .then((data) => {
+        if (!data) return
         setIndividualVOC(data);
       })
       .then(setLoading(false))
@@ -186,20 +189,27 @@ const Dashboard4 = ({ client }) => {
 
   /**cambia data -> cambia Estados y EstadosVOC */
   useEffect(() => {
+    console.log(data)
+    if (!data) return;
     if (button1) {
+      console.log("entro a button1")
       if ("consulta_estados" in data && "consulta_VOC" in data) {
-        setEstados(formatDataToPiechart(data.consulta_estados));
+        const data_aux = formatDataToPiechart(data.consulta_estados)
+        console.log("data_aux", data_aux)
+        setEstados(data_aux);
         setEstadosVOC(data.consulta_VOC);
       }
-    } else if (button2) {
+      return
+    }
+    if (button2) {
       if ("consulta_rrss_estados" in data && "consulta_rrss" in data) {
-        setEstados(formatDataToPiechart(data.consulta_rrss_estados));
+        const data_aux = formatDataToPiechart(data.consulta_rrss_estados)
+        console.log("data_aux", data_aux)
+        setEstados(data_aux);
         setEstadosVOC(data.consulta_rrss);
       }
+      return
     }
-    console.log("estados", estados);
-    console.log("estadosVOC", estadosVOC);
-    console.log("data", data);
   }, [data]);
 
   useEffect(() => {
@@ -247,7 +257,7 @@ const Dashboard4 = ({ client }) => {
   return (
     <div className="dashboard4__container">
       {client === null ? (
-        <div className="select__container">
+        <div className="select__container mx-auto py-3">
           <SelectPrimary
             title="Seleccione una cooperativa"
             data={cooperativas}
@@ -277,7 +287,7 @@ const Dashboard4 = ({ client }) => {
               selectedCooperativa === "ALL"
                 ? "Reporte VOC"
                 : "Reporte VOC " +
-                  selectedCooperativa.replace("COOPERATIVA ", "")
+                selectedCooperativa.replace("COOPERATIVA ", "")
             }
             client={
               selectedCooperativa === "ALL"

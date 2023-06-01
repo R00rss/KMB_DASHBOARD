@@ -3,7 +3,8 @@ from sklearn import linear_model
 import numpy as np
 from sklearn.metrics import r2_score
 
-from functions.Multipropositos import numOfDays,stringToDateType
+from functions.Multipropositos import numOfDays, stringToDateType
+
 
 def regresion_lineal(datos):
     dfy = pd.DataFrame(datos["num_call"])
@@ -11,14 +12,16 @@ def regresion_lineal(datos):
     x = dfx[0]
     y = dfy[0]
     regr = linear_model.LinearRegression()
-    X = x[:, np.newaxis]
+    X = np.expand_dims(x, axis=1)
+    # X = x[:, np.newaxis]
     regr.fit(X, y)
     regr.coef_
     m = regr.coef_[0]
     b = regr.intercept_
     y_p = m * X + b
-    r2_score(y,y_p)
+    r2_score(y, y_p)
     return {"m": m, "b": b}
+
 
 def predecir(dateI, dateF, dateBase, coeficientes):
     if "m" in coeficientes and "b" in coeficientes:
